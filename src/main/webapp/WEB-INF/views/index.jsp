@@ -27,18 +27,33 @@
 <div class="container">
     <div class="row pt-3">
         <div class="card" style="width: 100%">
+            <div class="card-header">
+                Accidents list:
+            </div>
             <div class="card-body">
                 <table class="table">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Text</th>
+                        <th scope="col">Address</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${users}" var="users">
+                    <c:forEach items="${accidents}" var="accident">
                         <tr>
                             <td>
-                                <c:out value="${users}"/>
+                                <c:out value="${accident.id}"/>
+                            </td>
+                            <td>
+                                <c:out value="${accident.name}"/>
+                            </td>
+                            <td>
+                                <c:out value="${accident.text}"/>
+                            </td>
+                            <td>
+                                <c:out value="${accident.address}"/>
                             </td>
                         </tr>
                     </c:forEach>

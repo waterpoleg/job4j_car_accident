@@ -1,22 +1,24 @@
 package ru.job4j.accident.control;
 
+import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import ru.job4j.accident.service.AccidentService;
 
-import java.util.ArrayList;
-import java.util.List;
-
+@ThreadSafe
 @Controller
 public class IndexControl {
 
+    private final AccidentService accidentService;
+
+    public IndexControl(AccidentService accidentService) {
+        this.accidentService = accidentService;
+    }
+
     @GetMapping("/")
     public String index(Model model) {
-        List<String> users = new ArrayList<>();
-        users.add("user one");
-        users.add("user two");
-        users.add("user three");
-        model.addAttribute("users", users);
+        model.addAttribute("accidents", accidentService.getAllAccidents());
         return "index";
     }
 }
