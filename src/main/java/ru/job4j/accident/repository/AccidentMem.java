@@ -6,25 +6,25 @@ import ru.job4j.accident.model.Accident;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class AccidentMem {
 
     private final Map<Integer, Accident> accidents = new ConcurrentHashMap<>();
-
-    public AccidentMem() {
-        accidents.put(1, new Accident(
-                1, "name 1", "text 1", "address 1"
-        ));
-        accidents.put(2, new Accident(
-                2, "name 2", "text 2", "address 2"
-        ));
-        accidents.put(3, new Accident(
-                3, "name 3", "text 3", "address 3"
-        ));
-    }
+    private final AtomicInteger id = new AtomicInteger();
 
     public Collection<Accident> getAccidents() {
         return accidents.values();
+    }
+
+    public void create(Accident accident) {
+        var newId = id.getAndIncrement();
+        accident.setId(newId);
+        accidents.put(newId, accident);
+    }
+
+    public Accident getByID(int id) {
+        return accidents.get(id);
     }
 }

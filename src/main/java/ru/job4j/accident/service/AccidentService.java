@@ -20,4 +20,12 @@ public class AccidentService {
     public Collection<Accident> getAllAccidents() {
         return accidentStore.getAccidents();
     }
+
+    public void create(Accident accident) {
+        accidentStore.create(accident);
+    }
+
+    public Accident getByID(int id) {
+        return accidentStore.getByID(id);
+    }
 }
