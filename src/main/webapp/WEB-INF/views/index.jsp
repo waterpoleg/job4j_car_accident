@@ -67,6 +67,9 @@
                             <td>
                                 <c:out value="${accident.address}"/>
                             </td>
+                            <td>
+                                <a class="btn btn-secondary" href="<c:url value='/update?id=${accident.id}'/>">Edit</a>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>

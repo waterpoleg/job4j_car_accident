@@ -21,8 +21,12 @@ public class AccidentService {
         return accidentStore.getAccidents();
     }
 
-    public void create(Accident accident) {
-        accidentStore.create(accident);
+    public void save(Accident accident) {
+        if (accident.getId() == 0) {
+            accidentStore.create(accident);
+        } else {
+            accidentStore.save(accident);
+        }
     }
 
     public Accident getByID(int id) {

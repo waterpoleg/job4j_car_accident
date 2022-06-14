@@ -31,7 +31,7 @@
                 Edit accident:
             </div>
             <div class="card-body">
-                <form  action="<c:url value='/save'/>" method='POST'>
+                <form  action="<c:url value='/save?id=${accident.id}'/>" method='POST'>
                     <table>
                         <tr>
                             <td>Name:</td>

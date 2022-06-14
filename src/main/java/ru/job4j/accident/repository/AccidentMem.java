@@ -19,9 +19,13 @@ public class AccidentMem {
     }
 
     public void create(Accident accident) {
-        var newId = id.getAndIncrement();
+        var newId = id.incrementAndGet();
         accident.setId(newId);
         accidents.put(newId, accident);
+    }
+
+    public void save(Accident accident) {
+        accidents.replace(accident.getId(), accident);
     }
 
     public Accident getByID(int id) {
