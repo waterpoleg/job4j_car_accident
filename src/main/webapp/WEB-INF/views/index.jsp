@@ -47,6 +47,7 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">Type</th>
                         <th scope="col">Name</th>
                         <th scope="col">Text</th>
                         <th scope="col">Address</th>
@@ -58,6 +59,7 @@
                             <td>
                                 <c:out value="${accident.id}"/>
                             </td>
+                            <td><c:out value="${accident.type.name}"/></td>
                             <td>
                                 <c:out value="${accident.name}"/>
                             </td>
