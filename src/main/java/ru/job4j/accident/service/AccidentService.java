@@ -3,6 +3,7 @@ package ru.job4j.accident.service;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
+import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.repository.AccidentMem;
 
 import java.util.Collection;
@@ -29,7 +30,20 @@ public class AccidentService {
         }
     }
 
+    public void save(Accident accident, int typeId) {
+        accident.setType(accidentStore.getAccidentTypeByID(typeId));
+        if (accident.getId() == 0) {
+            accidentStore.create(accident);
+        } else {
+            accidentStore.save(accident);
+        }
+    }
+
     public Accident getByID(int id) {
         return accidentStore.getByID(id);
+    }
+
+    public Collection<AccidentType> getAllAccidentTypes() {
+        return accidentStore.getAccidentTypes();
     }
 }
