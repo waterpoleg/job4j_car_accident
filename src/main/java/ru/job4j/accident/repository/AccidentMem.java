@@ -44,7 +44,7 @@ public class AccidentMem {
         return accidentTypes.values();
     }
 
-    public AccidentType getAccidentTypeByID(int id) {
+    public AccidentType getAccidentTypeById(int id) {
         return accidentTypes.get(id);
     }
 }

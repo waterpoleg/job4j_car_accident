@@ -31,7 +31,7 @@ public class AccidentService {
     }
 
     public void save(Accident accident, int typeId) {
-        accident.setType(accidentStore.getAccidentTypeByID(typeId));
+        accident.setType(accidentStore.getAccidentTypeById(typeId));
         if (accident.getId() == 0) {
             accidentStore.create(accident);
         } else {
