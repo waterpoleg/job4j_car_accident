@@ -51,6 +51,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">Text</th>
                         <th scope="col">Address</th>
+                        <th scope="col">Rules</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -68,6 +69,15 @@
                             </td>
                             <td>
                                 <c:out value="${accident.address}"/>
+                            </td>
+                            <td>
+                                <ul>
+                                    <c:forEach var="rule" items="${accident.rules}" >
+                                        <li>
+                                            <c:out value="${rule.name}"/>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
                             </td>
                             <td>
                                 <a class="btn btn-secondary" href="<c:url value='/update?id=${accident.id}'/>">Edit</a>
