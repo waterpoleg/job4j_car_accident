@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
-import ru.job4j.accident.repository.AccidentMem;
+import ru.job4j.accident.repository.AccidentJdbcTemplate;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -17,10 +17,10 @@ import java.util.stream.Collectors;
 @Service
 public class AccidentService {
 
-    private final AccidentMem accidentStore;
+    private final AccidentJdbcTemplate accidentStore;
 
-    public AccidentService(AccidentMem accidentMem) {
-        this.accidentStore = accidentMem;
+    public AccidentService(AccidentJdbcTemplate accidentJdbcTemplate) {
+        this.accidentStore = accidentJdbcTemplate;
     }
 
     public Collection<Accident> getAllAccidents() {
