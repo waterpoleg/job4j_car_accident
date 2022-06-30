@@ -62,12 +62,12 @@ public class AccidentJdbcTemplate {
 
     public Accident getByID(int id) {
         return jdbc.queryForObject(
-                "select id, name, description, address, type from accident where id = ?",
+                "select id, name, text, address, type from accident where id = ?",
                 (rs, row) -> {
                     Accident accident = new Accident();
                     accident.setId(id);
                     accident.setName(rs.getString("name"));
-                    accident.setText(rs.getString("description"));
+                    accident.setText(rs.getString("text"));
                     accident.setAddress(rs.getString("address"));
                     accident.setType(getAccidentTypeById(rs.getInt("type")));
                     return accident;
