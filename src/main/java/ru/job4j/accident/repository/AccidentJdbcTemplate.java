@@ -37,11 +37,11 @@ public class AccidentJdbcTemplate {
     }
 
     public Accident save(Accident accident) {
-        jdbc.update("update accident set name=?, text=?, address=? type=? where id=?",
+        jdbc.update("update accident set name=?, text=?, address=?, type=? where id=?",
                 accident.getName(),
                 accident.getText(),
                 accident.getAddress(),
-                accident.getType(),
+                accident.getType().getId(),
                 accident.getId()
         );
         return accident;

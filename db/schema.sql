@@ -3,7 +3,7 @@ CREATE TABLE accident (
     name text,
     text text,
     address text,
-    type int references accident(id)
+    type int references accident_type(id)
 );
 
 CREATE TABLE rule (
