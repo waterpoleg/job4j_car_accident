@@ -9,8 +9,7 @@ import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
 
 import java.sql.PreparedStatement;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Repository
 public class AccidentJdbcTemplate {
@@ -33,6 +32,7 @@ public class AccidentJdbcTemplate {
             return ps;
         }, keyHolder);
         accident.setId((int) keyHolder.getKey());
+        setRulesToAccident(accident);
         return accident;
     }
 
@@ -44,6 +44,7 @@ public class AccidentJdbcTemplate {
                 accident.getType().getId(),
                 accident.getId()
         );
+        setRulesToAccident(accident);
         return accident;
     }
 
@@ -56,6 +57,7 @@ public class AccidentJdbcTemplate {
                     accident.setText(rs.getString("text"));
                     accident.setAddress(rs.getString("address"));
                     accident.setType(getAccidentTypeById(rs.getInt("type")));
+                    accident.setRules(getRulesByAccidentId(rs.getInt("id")));
                     return accident;
                 });
     }
@@ -70,6 +72,7 @@ public class AccidentJdbcTemplate {
                     accident.setText(rs.getString("text"));
                     accident.setAddress(rs.getString("address"));
                     accident.setType(getAccidentTypeById(rs.getInt("type")));
+                    accident.setRules(getRulesByAccidentId(rs.getInt("id")));
                     return accident;
                 }, id);
     }
@@ -79,10 +82,33 @@ public class AccidentJdbcTemplate {
                 "select id, name from rule where id=?",
                 (rs, row) -> {
                     Rule rule = new Rule();
-                    rule.setId(id);
+                    rule.setId(rs.getInt("id"));
                     rule.setName(rs.getString("name"));
                     return rule;
                 }, id);
+    }
+
+    public Set<Rule> getRulesByAccidentId(int accidentId) {
+        return new HashSet<>(
+                jdbc.query("select * from rule r "
+                                + "join accident_rule ar on r.id = ar.rule_id"
+                                + " where ar.accident_id = ?",
+                (rs, row) -> {
+                    Rule rule = new Rule();
+                    rule.setId(rs.getInt("id"));
+                    rule.setName(rs.getString("name"));
+                    return rule;
+                }, accidentId)
+        );
+    }
+
+    public void setRulesToAccident(Accident accident) {
+        var rules = accident.getRules();
+        for (var rule: rules) {
+            jdbc.update("insert into accident_rule (accident_id, rule_id) VALUES (?, ?)",
+                    accident.getId(),
+                    rule.getId());
+        }
     }
 
     public AccidentType getAccidentTypeById(int id) {

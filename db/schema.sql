@@ -1,3 +1,8 @@
+CREATE TABLE accident_type (
+    id serial primary key,
+    name text
+);
+
 CREATE TABLE accident (
     id serial primary key,
     name text,
@@ -17,7 +22,12 @@ CREATE TABLE accident_rule (
     rule_id int references rule(id)
 );
 
-CREATE TABLE accident_type (
-    id serial primary key,
-    name text
-);
+
+
+insert into accident_type (name) values ('Car & Car');
+insert into accident_type (name) values ('Car & human');
+insert into accident_type (name) values ('Car & bike');
+
+insert into rule (name) values ('Rule 1');
+insert into rule (name) values ('Rule 2');
+insert into rule (name) values ('Rule 3');
