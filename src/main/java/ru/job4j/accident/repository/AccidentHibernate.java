@@ -2,7 +2,6 @@ package ru.job4j.accident.repository;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
@@ -10,7 +9,9 @@ import ru.job4j.accident.model.Rule;
 import java.util.List;
 import java.util.function.Function;
 
-@Repository
+/*
+    @Repository
+*/
 public class AccidentHibernate {
     private final SessionFactory sf;
 
