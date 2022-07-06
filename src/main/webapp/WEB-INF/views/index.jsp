@@ -36,6 +36,11 @@
                 <a class="nav-item nav-link" href="<c:url value='/create'/>">Add</a>
             </div>
         </div>
+        <div class="navbar-nav ml-auto">
+            <div class="nav-item">
+                <span class="nav-link">Logged in as : <strong>${user.username}</strong></span>
+            </div>
+        </div>
     </nav>
     <div class="row pt-3">
         <div class="card" style="width: 100%">
