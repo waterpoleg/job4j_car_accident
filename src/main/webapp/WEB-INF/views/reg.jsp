@@ -21,17 +21,24 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <title>Log in to the Accident Control System</title>
+    <title>New User Registration</title>
 </head>
 <body>
 <div class="container">
     <div class="row pt-3">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Log in form:
+                Registration:
             </div>
             <div class="card-body">
-                <form name='login' action="<c:url value='/login'/>" method='POST'>
+                <c:if test="${not empty errorMessage}">
+                    <div class="row pt-3">
+                        <div class="alert alert-danger">
+                                ${errorMessage}
+                        </div>
+                    </div>
+                </c:if>
+                <form name='login' action="<c:url value='/reg'/>" method='POST'>
                     <table>
                         <tr>
                             <td>UserName:</td>
@@ -46,7 +53,6 @@
                         </tr>
                     </table>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                    <a href="<c:url value='/reg'/>">Registration</a>
                 </form>
 
             </div>
